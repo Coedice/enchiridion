@@ -104,58 +104,61 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Scrollbar(
         child: CustomScrollView(
           slivers: [
-            SliverGrid(
-              delegate: SliverChildBuilderDelegate(
-                (context, i) {
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => ContentPage(chapter: i),
+            SliverPadding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              sliver: SliverGrid(
+                delegate: SliverChildBuilderDelegate(
+                  (context, i) {
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ContentPage(chapter: i),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        margin: const EdgeInsets.all(8),
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.black,
                         ),
-                      );
-                    },
-                    child: Container(
-                      margin: const EdgeInsets.all(8),
-                      padding: const EdgeInsets.all(8),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.black,
-                      ),
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.topCenter,
-                            child: Text(
-                              useRomanNumerals ? romanize(i + 1) : "${i + 1}",
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
+                        child: Stack(
+                          children: [
+                            Align(
+                              alignment: Alignment.topCenter,
+                              child: Text(
+                                useRomanNumerals ? romanize(i + 1) : "${i + 1}",
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: AutoSizeText(
-                              chapters[i],
-                              maxLines: 1,
-                              style: const TextStyle(
-                                fontSize: 20,
-                                color: Colors.white,
+                            Align(
+                              alignment: Alignment.bottomCenter,
+                              child: AutoSizeText(
+                                chapters[i],
+                                maxLines: 1,
+                                style: const TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                },
-                childCount: chapters.length,
-              ),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                childAspectRatio: 1.3,
-                crossAxisCount: 3,
+                    );
+                  },
+                  childCount: chapters.length,
+                ),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  childAspectRatio: 1.3,
+                  crossAxisCount: 3,
+                ),
               ),
             ),
           ],
