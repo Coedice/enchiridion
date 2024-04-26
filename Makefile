@@ -6,7 +6,7 @@ simulate:
 			--launch apple_ios_simulator; \
 		sleep 2; \
 		flutter run \
-			--device-id 107D7FE5-7593-48AA-A184-2ED9CE6D6E53 \
+			--device-id AEC84582-D415-4049-8E96-E62950AA9982 \
 			--suppress-analytics; \
 	elif [ "$(os)" = "android" ]; then \
 		flutter emulators \
