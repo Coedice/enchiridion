@@ -102,6 +102,11 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              child: const Text('Developer website'),
+              onPressed: () => _launchURL("https://gavindou.ch"),
+            ),
           ],
         ),
       ),
