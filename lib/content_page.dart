@@ -74,6 +74,10 @@ class _ContentPageState extends State<ContentPage> {
     var appState = context.watch<MyAppState>();
     selectedTranslation = appState.getSelectedTranslation();
     useRomanNumerals = appState.getUseRomanNumerals();
+    TextScaler textScaler = MediaQuery.of(context).textScaler;
+    double chapterTitleFontSize = textScaler.scale(20);
+    double chapterNumberFontSize = textScaler.scale(40);
+    double contentFontSize = textScaler.scale(16);
 
     scrolled = false;
     List<Widget> content = [];
@@ -81,23 +85,25 @@ class _ContentPageState extends State<ContentPage> {
       GlobalKey? key = i == widget.chapter ? _scrollToKey : null;
       content.add(Text(
         useRomanNumerals ? romanize(i + 1) : "${i + 1}",
-        style: const TextStyle(
-          fontSize: 40,
+        style: TextStyle(
+          fontSize: chapterNumberFontSize,
         ),
         key: key,
       ));
       content.add(Text(
         chapterTitles[i],
-        style: const TextStyle(
-          fontSize: 20,
+        style: TextStyle(
+          fontSize: chapterTitleFontSize,
         ),
       ));
-      content.add(
-        SelectableText(
-          contentText[i],
-          textAlign: TextAlign.left,
+      content.add(const SizedBox(height: 8));
+      content.add(SelectableText(
+        contentText[i],
+        textAlign: TextAlign.left,
+        style: TextStyle(
+          fontSize: contentFontSize,
         ),
-      );
+      ));
     }
     return Scaffold(
       appBar: AppBar(
