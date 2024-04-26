@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:yaml/yaml.dart';
 import 'app_state.dart';
 import "package:provider/provider.dart";
+import "package:url_launcher/url_launcher.dart";
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -19,6 +20,14 @@ class SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     _loadTranslations();
+  }
+
+  void _launchURL(String url) async {
+    final Uri uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    }
   }
 
   Future<void> _loadTranslations() async {
@@ -68,6 +77,15 @@ class SettingsPageState extends State<SettingsPage> {
                 );
               }).toList(),
             ),
+            ElevatedButton(
+                child: const Text('View translation source'),
+                onPressed: () {
+                  String? url =
+                      translations.firstWhere((translation) => translation['title'] == selectedTranslation)['url'];
+                  if (url != null) {
+                    _launchURL(url);
+                  }
+                }),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

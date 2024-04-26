@@ -30,7 +30,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    print("GGG ran _initState");
     super.initState();
     _loadChapters();
   }
