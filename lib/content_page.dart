@@ -82,7 +82,7 @@ class _ContentPageState extends State<ContentPage> {
     scrolled = false;
     List<Widget> content = [];
     for (int i = 0; i < contentText.length; i++) {
-      GlobalKey? key = i == widget.chapter ? _scrollToKey : null;
+      GlobalKey? key = i == widget.chapter && i != 0 ? _scrollToKey : null;
       content.add(Text(
         useRomanNumerals ? romanize(i + 1) : "${i + 1}",
         style: TextStyle(
