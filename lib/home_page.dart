@@ -51,7 +51,10 @@ class _HomePageState extends State<HomePage> {
                 MaterialPageRoute(builder: (context) => const SettingsPage()),
               );
             },
-            child: const Icon(Icons.settings),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Icon(Icons.settings),
+            ),
           )
         ],
       ),
