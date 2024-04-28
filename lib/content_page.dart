@@ -87,6 +87,7 @@ class _ContentPageState extends State<ContentPage> {
         useRomanNumerals ? romanize(i + 1) : "${i + 1}",
         style: TextStyle(
           fontSize: chapterNumberFontSize,
+          // color: Colors.white,
         ),
         key: key,
       ));
@@ -94,6 +95,7 @@ class _ContentPageState extends State<ContentPage> {
         chapterTitles[i],
         style: TextStyle(
           fontSize: chapterTitleFontSize,
+          // color: Colors.white,
         ),
       ));
       content.add(const SizedBox(height: 8));
@@ -102,6 +104,7 @@ class _ContentPageState extends State<ContentPage> {
         textAlign: TextAlign.left,
         style: TextStyle(
           fontSize: contentFontSize,
+          // color: Colors.white,
         ),
       ));
     }

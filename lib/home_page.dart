@@ -40,7 +40,6 @@ class _HomePageState extends State<HomePage> {
     useRomanNumerals = appState.getUseRomanNumerals();
 
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: const Text("Enchiridion"),
         actions: [
@@ -80,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8),
-                          color: Colors.black,
+                          color: Colors.white,
                         ),
                         child: Stack(
                           children: [
@@ -90,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                                 useRomanNumerals ? romanize(i + 1) : "${i + 1}",
                                 style: const TextStyle(
                                   fontSize: 20,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
@@ -101,7 +100,7 @@ class _HomePageState extends State<HomePage> {
                                 maxLines: 1,
                                 style: const TextStyle(
                                   fontSize: 20,
-                                  color: Colors.white,
+                                  color: Colors.black,
                                 ),
                               ),
                             ),
