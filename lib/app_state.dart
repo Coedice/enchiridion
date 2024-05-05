@@ -39,7 +39,7 @@ class MyAppState extends ChangeNotifier {
     });
   }
 
-  MyAppState() {}
+  MyAppState();
 }
 
 class MyApp extends StatelessWidget {
