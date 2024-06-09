@@ -52,6 +52,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => appState,
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Enchiridion',
         theme: ThemeData(
           colorScheme: const ColorScheme(
