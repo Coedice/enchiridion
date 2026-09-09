@@ -1,0 +1,27 @@
+---
+layout: default
+title: Settings
+---
+
+<header class="appbar">
+  <a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back">&#8592;</a>
+  <h1>Settings</h1>
+  <span style="width: 36px"></span>
+</header>
+
+<main class="settings">
+  <div class="label">Translation:</div>
+  <select id="translation-select"></select>
+
+  <button id="translation-source">View translation source</button>
+
+  <div class="row">
+    <span class="label" style="margin: 0">Use Roman numerals:</span>
+    <label class="switch">
+      <input type="checkbox" id="roman-toggle">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <button id="dev-website">GitHub repo</button>
+</main>

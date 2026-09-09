@@ -1,0 +1,21 @@
+---
+layout: default
+title: Content
+---
+
+<header class="appbar">
+  <a class="back-btn" href="{{ '/' | relative_url }}" aria-label="Back">&#8592;</a>
+  <h1>Enchiridion</h1>
+  <a class="settings-btn" href="{{ '/settings.html' | relative_url }}" aria-label="Settings">&#9881;</a>
+</header>
+
+<main class="content" id="content-page">
+  {% for chapter in site.data.chapters %}
+    {% assign i = forloop.index0 %}
+    <section class="chapter" id="chapter-{{ i }}" data-index="{{ i }}">
+      <div class="num chapter-number" data-num="{{ forloop.index }}">{{ forloop.index }}</div>
+      <h2 class="title">{{ chapter }}</h2>
+      <p class="text" data-chapter-index="{{ i }}"></p>
+    </section>
+  {% endfor %}
+</main>

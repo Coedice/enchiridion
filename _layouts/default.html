@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <title>{% if page.title %}{{ page.title }} - {% endif %}Enchiridion</title>
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="manifest" href="{{ '/manifest.json' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ '/assets/images/app_icon.png' | relative_url }}">
+  <link rel="icon" type="image/png" href="{{ '/assets/images/app_icon.png' | relative_url }}">
+  <meta name="theme-color" content="#000000">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="translations-url" content="{{ '/assets/data/translations.json' | relative_url }}">
+</head>
+<body>
+  {{ content }}
+
+  <script src="{{ '/assets/js/app.js' | relative_url }}"></script>
+  {% if site.register_sw %}
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('{{ '/sw.js' | relative_url }}');
+      });
+    }
+  </script>
+  {% endif %}
+</body>
+</html>

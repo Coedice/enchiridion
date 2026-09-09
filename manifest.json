@@ -1,0 +1,17 @@
+{
+  "name": "Enchiridion",
+  "short_name": "Enchiridion",
+  "description": "The Enchiridion of Epictetus, an ancient handbook to the philosophy of Stoicism.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "assets/images/app_icon.png",
+      "sizes": "1024x1024",
+      "type": "image/png"
+    }
+  ]
+}
