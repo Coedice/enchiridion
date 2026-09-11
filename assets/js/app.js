@@ -3,6 +3,21 @@
   var STORAGE_ROMAN = 'useRomanNumerals';
   var DEFAULT_TRANSLATION = 'William Abbott Oldfather';
 
+  var AUDIO_SLUGS = {
+    'William Abbott Oldfather': 'william-abbott-oldfather'
+  };
+  var AUDIO_MARK = '\uD83D\uDD0A';
+  var AUDIO_PLAY = '\u25B6';
+  var AUDIO_PAUSE = '\u275A\u275A';
+
+  function pad2(n) {
+    return n < 10 ? '0' + n : String(n);
+  }
+
+  function chapterAudioUrl(slug, index) {
+    return 'assets/audio/' + slug + '/' + pad2(index + 1) + '.mp3';
+  }
+
   function getTranslation() {
     try {
       return localStorage.getItem(STORAGE_TRANSLATION) || DEFAULT_TRANSLATION;
@@ -63,11 +78,18 @@
       var translation = data.filter(function (t) { return t.title === selected; })[0] || data[0];
       if (!translation) return;
       var texts = translation.chapters || [];
+      var page = document.getElementById('content-page');
+      var slug = AUDIO_SLUGS[translation.title] || '';
+      if (page) page.classList.toggle('show-audio', !!slug);
       document.querySelectorAll('.chapter').forEach(function (sec) {
         var idx = parseInt(sec.getAttribute('data-index'), 10);
         var textEl = sec.querySelector('.text');
         if (textEl && texts[idx] != null) {
           textEl.textContent = texts[idx];
+        }
+        var play = sec.querySelector('.play-btn');
+        if (play) {
+          play.setAttribute('data-audio', slug ? chapterAudioUrl(slug, idx) : '');
         }
       });
       if (window.location.hash) {
@@ -87,7 +109,7 @@
       translations.forEach(function (t) {
         var opt = document.createElement('option');
         opt.value = t.title;
-        opt.textContent = t.title;
+        opt.textContent = AUDIO_SLUGS[t.title] ? t.title + ' ' + AUDIO_MARK : t.title;
         select.appendChild(opt);
       });
       select.value = getTranslation();
@@ -122,8 +144,50 @@
     }
   }
 
+  function resetPlayButtons() {
+    document.querySelectorAll('.play-btn.playing').forEach(function (btn) {
+      btn.classList.remove('playing');
+      btn.innerHTML = AUDIO_PLAY;
+      btn.setAttribute('aria-label', 'Play audio');
+    });
+  }
+
+  function initPlayer() {
+    var audio = document.getElementById('chapter-audio');
+    if (!audio) return;
+    audio.addEventListener('ended', resetPlayButtons);
+    audio.addEventListener('pause', resetPlayButtons);
+    audio.addEventListener('error', function () {
+      resetPlayButtons();
+      audio.removeAttribute('src');
+      audio.removeAttribute('data-current');
+    });
+    document.querySelectorAll('.play-btn').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var src = btn.getAttribute('data-audio');
+        if (!src) return;
+        if (audio.getAttribute('data-current') === src && !audio.paused) {
+          audio.pause();
+          resetPlayButtons();
+          return;
+        }
+        resetPlayButtons();
+        audio.src = src;
+        audio.setAttribute('data-current', src);
+        audio.play().catch(function () {
+          resetPlayButtons();
+          audio.removeAttribute('data-current');
+        });
+        btn.classList.add('playing');
+        btn.innerHTML = AUDIO_PAUSE;
+        btn.setAttribute('aria-label', 'Pause audio');
+      });
+    });
+  }
+
   function init() {
     applyNumerals();
+    initPlayer();
     loadTranslations().then(function (data) {
       if (document.getElementById('content-page')) {
         applyContent();

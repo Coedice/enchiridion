@@ -1,4 +1,4 @@
-var CACHE = 'enchiridion-v7';
+var CACHE = 'enchiridion-v8';
 var CORE = [
   './',
   './index.html',
@@ -56,6 +56,24 @@ self.addEventListener('fetch', function (event) {
             return cached || caches.match('./index.html');
           });
         })
+    );
+    return;
+  }
+
+  if (/\/assets\/audio\//.test(request.url)) {
+    event.respondWith(
+      caches.match(request).then(function (cached) {
+        if (cached) return cached;
+        return fetch(request).then(function (response) {
+          if (response && response.status === 200) {
+            var copy = response.clone();
+            caches.open(CACHE).then(function (cache) {
+              cache.put(request, copy);
+            });
+          }
+          return response;
+        });
+      })
     );
     return;
   }

@@ -15,7 +15,10 @@ title: Content
     <section class="chapter" id="chapter-{{ i }}" data-index="{{ i }}">
       <div class="num chapter-number" data-num="{{ forloop.index }}">{{ forloop.index }}</div>
       <h2 class="title">{{ chapter }}</h2>
+      <button class="play-btn" aria-label="Play audio" title="Play audio">&#9654;</button>
       <p class="text" data-chapter-index="{{ i }}"></p>
     </section>
   {% endfor %}
 </main>
+
+<audio id="chapter-audio" preload="none"></audio>

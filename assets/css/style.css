@@ -117,8 +117,42 @@ a {
 .chapter .title {
   font-size: 20px;
   font-weight: 400;
-  margin-bottom: 8px;
   text-align: center;
+  margin-bottom: 4px;
+}
+
+.play-btn {
+  display: none;
+  background: #fff;
+  color: #000;
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 12px;
+}
+
+.show-audio .play-btn {
+  display: flex;
+}
+
+.play-btn.playing {
+  background: #999;
+}
+
+.play-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+#chapter-audio {
+  display: none;
 }
 
 .chapter .text {
